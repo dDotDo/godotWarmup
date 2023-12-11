@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://cib05l63e64td"]
+
+[ext_resource type="Texture2D" uid="uid://b1x51wrlpxyri" path="res://art/enemyFlyingAlt_1.png" id="1_2myo3"]
+[ext_resource type="Script" path="res://mob.gd" id="1_gux7t"]
+[ext_resource type="Texture2D" uid="uid://by4lr0ajomdel" path="res://art/enemyFlyingAlt_2.png" id="2_w0ov5"]
+[ext_resource type="Texture2D" uid="uid://ctuhfits6p33k" path="res://art/enemySwimming_1.png" id="3_vxmtg"]
+[ext_resource type="Texture2D" uid="uid://b7fxhwwj2coil" path="res://art/enemySwimming_2.png" id="4_uyfqj"]
+[ext_resource type="Texture2D" uid="uid://bxbq5or5ahojq" path="res://art/enemyWalking_1.png" id="5_uudce"]
+[ext_resource type="Texture2D" uid="uid://deyq2xbdx7a60" path="res://art/enemyWalking_2.png" id="6_wkq0n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j82dc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2myo3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w0ov5")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vxmtg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uyfqj")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_uudce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wkq0n")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wdgpd"]
+radius = 52.0
+height = 104.0
+
+[node name="mob" type="RigidBody2D"]
+rotation = 1.5708
+scale = Vector2(0.75, 0.75)
+collision_mask = 0
+gravity_scale = 1.66533e-16
+script = ExtResource("1_gux7t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j82dc")
+animation = &"swim"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13.3333, -5.82818e-07)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wdgpd")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
