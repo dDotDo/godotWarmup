@@ -8,6 +8,7 @@ var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
 	position = Vector2(100, 200)
+	hide()
 	pass # Replace with function body.
 
 
