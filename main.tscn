@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn72bm1dc278p"]
+[gd_scene load_steps=7 format=3 uid="uid://cn72bm1dc278p"]
 
 [ext_resource type="PackedScene" uid="uid://f3dlwb1tlsvk" path="res://player.tscn" id="1_8biat"]
 [ext_resource type="Script" path="res://main.gd" id="1_r7qgc"]
 [ext_resource type="PackedScene" uid="uid://cib05l63e64td" path="res://mob.tscn" id="2_ao2ap"]
 [ext_resource type="PackedScene" uid="uid://dtlnuj8jpx8ec" path="res://hud.tscn" id="4_cjbh1"]
+[ext_resource type="AudioStream" uid="uid://d12pfns53vdty" path="res://art/gameover.wav" id="5_vctvt"]
 
 [sub_resource type="Curve2D" id="Curve2D_sreon"]
 _data = {
@@ -16,6 +17,8 @@ script = ExtResource("1_r7qgc")
 mob_scene = ExtResource("2_ao2ap")
 
 [node name="Player" parent="." instance=ExtResource("1_8biat")]
+z_index = 2
+position = Vector2(-6, 0)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -47,6 +50,7 @@ grow_vertical = 2
 color = Color(0.0901961, 0.364706, 0.376471, 1)
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vctvt")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
